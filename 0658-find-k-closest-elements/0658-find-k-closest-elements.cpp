@@ -7,7 +7,7 @@ public:
         {
             pq.push({abs(arr[i]-x),arr[i]});
             if(pq.size()>k)
-            pq.pop();
+                pq.pop();
         }
         while(!pq.empty())
         {
