@@ -23,7 +23,7 @@ class Solution
     {
         priority_queue<ppi,vector<ppi>,greater<ppi>>minh;
         vector<int>ans;
-        for(int i=0;i<arr.size();i++)
+        for(int i=0;i<k;i++)
         {
             minh.push({arr[i][0],{i,0}});
         }
