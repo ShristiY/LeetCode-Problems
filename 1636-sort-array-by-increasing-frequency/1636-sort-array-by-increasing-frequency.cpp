@@ -3,7 +3,10 @@ public:
     struct compare{
     bool operator()(pair<int,int>a,pair<int,int>b){
         if(a.first==b.first){
-            return a.second<b.second;
+            {
+                if(a.second<b.second)return true;
+                return false;
+            }
         }
         return a.first>b.first;
     }
