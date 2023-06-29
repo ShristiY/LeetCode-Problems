@@ -1,23 +1,21 @@
 class Solution {
 public:
+    //IInd approach
     void rotate(vector<vector<int>>& mat) {
         int n=mat.size();
-        vector<vector<int>>dum(n,vector<int>(n,0));
+        int m=mat[0].size();
         
-        for(int i=0;i<n;i++)
+        for(int i=0;i<=n-2;i++)
         {
-            for(int j=0;j<n;j++)
+            for(int j=i+1;j<=n-1;j++)
             {
-                dum[j][n-i-1]=mat[i][j];
+                swap(mat[i][j],mat[j][i]);
             }
         }
         
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<n;j++)
-            {
-                mat[i][j]=dum[i][j];
-            }
+            reverse(mat[i].begin(),mat[i].end());
         }
     }
 };
