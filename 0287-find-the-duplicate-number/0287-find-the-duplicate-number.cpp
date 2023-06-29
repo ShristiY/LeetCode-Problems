@@ -1,19 +1,19 @@
 class Solution {
 public:
-    //IInd approach
     int findDuplicate(vector<int>& nums) {
-        int ans;
-        int n=nums.size();
-        vector<int>freq(n,0);
-        for(int i=0;i<n;i++)
-        {
-            freq[nums[i]]++;
+        int s=nums[0];
+        int f=nums[0];
+        do{
+            s=nums[s];
+            f=nums[nums[f]];
         }
-        for(int i=0;i<n;i++)
+        while(s!=f);
+         s=nums[0];
+        while(s!=f)
         {
-            if(freq[i]>1)
-                ans=i;
+            s=nums[s];
+            f=nums[f];
         }
-        return ans;
+        return s;
     }
 };
