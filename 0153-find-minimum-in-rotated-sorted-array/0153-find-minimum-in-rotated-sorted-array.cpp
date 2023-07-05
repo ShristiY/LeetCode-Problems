@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //MOST OPTIMISED
     int findMin(vector<int>& nums) {
         int n=nums.size();
         int l=0,h=n-1;
