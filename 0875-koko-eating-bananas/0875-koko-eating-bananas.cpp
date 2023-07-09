@@ -19,11 +19,13 @@ public:
     int minEatingSpeed(vector<int>& piles, int h) {
         int low = 1; 
         int high = maxElement(piles);
+        int ans=maxElement(piles);
         while(low < high){
             int mid = low + (high-low)/2;
             int totalhrs = calculate_totalhrs(piles, mid);
 
             if(totalhrs <= h){
+                ans=mid;
                 high = mid;
             }
             else{
@@ -31,6 +33,6 @@ public:
             }
         }
 
-        return low;
+        return ans;
     }
 };
