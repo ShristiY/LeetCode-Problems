@@ -21,7 +21,7 @@ public:
             maxi=max(maxi,weights[i]);
             sum+=weights[i];
         }
-        int required=INT_MAX;
+
         int l=maxi,h=sum;
         while(l<=h)
         {
@@ -29,7 +29,6 @@ public:
             int cur=func(weights,mid);
             if(cur<=days)
             {
-                required=min(required,cur);
                 h=mid-1;
             }
             else
