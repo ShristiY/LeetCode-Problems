@@ -10,14 +10,14 @@ using namespace std;
 class Solution {
 public:
 
-    bool ispossible( vector<int> &stalls , int k , int mid){
+    bool ispossible( vector<int> &stalls , int k , int dist){
          
          int cntcows = 1;
          int lastplacedcow =stalls[0];
          
          for(int i = 1; i < stalls.size() ; i++){
              
-             if( stalls[i] - lastplacedcow >= mid){
+             if( stalls[i] - lastplacedcow >= dist){
                  
                  cntcows++;
                  lastplacedcow = stalls[i];
@@ -27,7 +27,6 @@ public:
          if(cntcows >= k)
          return true;
          
-         else
          return false;
      }
     int solve(int n, int k, vector<int> &stalls) {
