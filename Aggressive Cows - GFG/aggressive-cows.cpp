@@ -10,12 +10,12 @@ using namespace std;
 class Solution {
 public:
 
-    bool ispossible( vector<int> &stalls , int n , int k , int mid){
+    bool ispossible( vector<int> &stalls , int k , int mid){
          
          int cntcows = 1;
          int lastplacedcow =stalls[0];
          
-         for(int i = 1; i < n ; i++){
+         for(int i = 1; i < stalls.size() ; i++){
              
              if( stalls[i] - lastplacedcow >= mid){
                  
@@ -39,9 +39,9 @@ public:
         
         while( low <= high){
             
-            int mid = (low + high) >> 1;
+            int mid = low+(high-low)/2;
             
-            if( ispossible( stalls , n , k , mid)){
+            if( ispossible( stalls ,  k , mid)){
                 
                 low = mid + 1;
             }
