@@ -20,7 +20,7 @@ class Solution
            st.pop();
            
            if(st.empty())
-           ans.push_back(i+1);
+           ans.push_back(i+1); // THIS LINE IS VERY IMPORTANT
            else if(st.top().first>arr[i])
            ans.push_back(i-st.top().second);
            
