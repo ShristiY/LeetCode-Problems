@@ -3,7 +3,7 @@ public:
     int largestRectangleArea(vector<int>& arr) {
         int n=arr.size();
         stack<int>st;
-        int maxi=0;
+        int maxi=INT_MIN;
         for(int i=0;i<=n;i++)
         {
             while(!st.empty() && (i==n || (arr[st.top()]>=arr[i])))
