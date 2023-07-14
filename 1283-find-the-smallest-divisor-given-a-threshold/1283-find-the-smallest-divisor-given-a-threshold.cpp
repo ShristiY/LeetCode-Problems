@@ -1,26 +1,24 @@
 class Solution {
 public:
-    int findMax(vector<int>&nums)
+    long long func(vector<int>&nums,int threshold,int mid)
     {
-        int ans=INT_MIN;
+        long long total=0;
         for(int i=0;i<nums.size();i++)
-            ans=max(ans,nums[i]);
-        return ans;
-    }
-    int func(vector<int>&nums,int day)
-    {
-        int sum=0;
-        for(int i=0;i<nums.size();i++)
-            sum+=(ceil)((double)(nums[i])/(double)(day));
-        return sum;
+            total+=ceil(double(nums[i])/double(mid));
+        
+        return total;
     }
     int smallestDivisor(vector<int>& nums, int threshold) {
-        int l=1,h=findMax(nums);
-        int ans=-1;
+        int maxi=INT_MIN;
+        for(int i=0;i<nums.size();i++)
+        {
+            maxi=max(maxi,nums[i]);
+        }
+        int l=1,h=maxi, ans=maxi;
         while(l<=h)
         {
             int mid=l+(h-l)/2;
-            if(func(nums,mid)<=threshold)
+            if(func(nums,threshold,mid)<=threshold)
             {
                 ans=mid;
                 h=mid-1;
