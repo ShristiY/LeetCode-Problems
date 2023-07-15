@@ -1,8 +1,8 @@
 class MedianFinder {
-public:
+    private:
     priority_queue<int>maxh;
     priority_queue<int,vector<int>,greater<int>>minh;
-    public:
+public:
     MedianFinder() {
         
     }
@@ -26,7 +26,7 @@ public:
     
     double findMedian() {
         if(maxh.size()==minh.size())
-        return (maxh.top()+minh.top())/2.0;
+            return (maxh.top()+minh.top())/2.0;
         else if(maxh.size()>minh.size())
             return maxh.top();
         return minh.top();
