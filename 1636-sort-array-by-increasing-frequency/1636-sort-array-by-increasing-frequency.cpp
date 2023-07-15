@@ -1,39 +1,28 @@
 class Solution {
 public:
-    struct compare{
-    bool operator()(pair<int,int>a,pair<int,int>b){
-        if(a.first==b.first){
-            {
-                if(a.second<b.second)return true;
-                return false;
-            }
-        }
-        return a.first>b.first;
-    }
-    };
     vector<int> frequencySort(vector<int>& nums) {
+        //EASY AND BEST SOLUTION
+        int n=nums.size();
         vector<int>ans;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,compare>pq;
         unordered_map<int,int>mp;
-        for(int i=0;i<nums.size();i++)
+        priority_queue<pair<int,int>>pq;
+        for(int i=0;i<n;i++)
             mp[nums[i]]++;
-        
+        int count=0;
         for(auto it:mp)
         {
-            int ele=it.first;
-            int freq=it.second;
-            pq.push({freq,ele});
+            int num=it.first;
+            int freq=-(it.second);
+            pq.push({freq,num});
         }
-        
         while(!pq.empty())
         {
-            auto it=pq.top();
-            int freq=it.first;
-            int num=it.second;
-            while(freq>0)
+            int num=pq.top().second;
+            count=-(pq.top().first);
+            while(count!=0)
             {
+                count--;
                 ans.push_back(num);
-                freq--;
             }
             pq.pop();
         }
