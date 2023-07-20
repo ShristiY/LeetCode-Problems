@@ -22,7 +22,7 @@ public:
         vector<vector<int>>ans;
         vector<int>ds;
         int n=arr.size();
-    
+        sort(arr.begin(),arr.end());
         func(arr,ans,ds,target,0,n);
         return ans;
     }
