@@ -1,33 +1,6 @@
 class Solution {
 public:
-    bool isSafe(int row,int col,vector<string>&board,int n)
-    {
-        int duprow=row;
-        int dupcol=col;
-        while(col>=0 && row>=0)
-        {
-            if(board[row][col]=='Q') return false;
-            row--;
-            col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(col>=0)
-        {
-            if(board[row][col]=='Q') return false;
-            col--;
-        }
-        row=duprow;
-        col=dupcol;
-        while(row<n && col>=0)
-        {
-            if(board[row][col]=='Q') return false;
-            row++;
-            col--;
-        }
-        return true;
-    }
-    void func(vector<vector<string>>&ans,vector<string>&board,int n, int col)
+    void func(vector<vector<string>>&ans,vector<string>&board,int n, int col,vector<int>&left,vector<int>&upDiagonal,vector<int>&downDiagonal)
     {
         if(col==n)
         {
@@ -36,11 +9,17 @@ public:
         }
         for(int row=0;row<n;row++)
         {
-            if(isSafe(row,col,board,n))
+            if(left[row]==0 && upDiagonal[row+col]==0 && downDiagonal[n-1+(col-row)]==0)
             {
                 board[row][col]='Q';
-                func(ans,board,n,col+1);
+                left[row]=1;
+                upDiagonal[row+col]=1;
+                downDiagonal[(n-1)+(col-row)]=1;
+                func(ans,board,n,col+1,left,upDiagonal,downDiagonal);
                 board[row][col]='.';
+                left[row]=0;
+                upDiagonal[row+col]=0;
+                downDiagonal[(n-1)+(col-row)]=0;
             }
         }
     }
@@ -48,9 +27,12 @@ public:
         vector<vector<string>>ans;
         vector<string>board(n);
         string s(n,'.');
+        vector<int>left(n,0);
+        vector<int>upDiagonal(2*n-1,0);
+        vector<int>downDiagonal(2*n-1,0);
         for(int i=0;i<n;i++)
             board[i]=s;
-        func(ans,board,n,0);
+        func(ans,board,n,0,left,upDiagonal,downDiagonal);
         return ans;
     }
 };
