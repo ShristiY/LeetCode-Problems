@@ -2,7 +2,7 @@ class Solution {
 public:
     void func(vector<int>nums, vector<vector<int>>&ans,int index, int n)
     {
-        if(index==n-1)
+        if(index==n)
         {
             ans.push_back(nums);
             return;
