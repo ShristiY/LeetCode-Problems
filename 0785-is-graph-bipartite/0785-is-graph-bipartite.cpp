@@ -1,24 +1,18 @@
 class Solution {
 public:
-    bool detect(int start, vector<vector<int>>&graph, vector<int>&color)
+    bool detect(int node,vector<vector<int>>&graph,vector<int>&color)
     {
-        color[start]=0;
-        queue<int>q;
-        q.push(start);
-        while(!q.empty())
+        // color[node]=0;
+        for(auto it:graph[node])
         {
-            int node=q.front();
-            q.pop();
-            for(auto it:graph[node])
+            if(color[it]==-1)
             {
-                if(color[it]==-1)
-                {
-                    q.push(it);
-                    color[it]=!color[node];
-                }
-                else if(color[it]==color[node])
+                color[it]=!color[node];
+                if(detect(it,graph,color)==false)
                     return false;
             }
+            else if(color[it]==color[node])
+                return false;
         }
         return true;
     }
@@ -29,6 +23,7 @@ public:
         {
             if(color[i]==-1)
             {
+                color[i]=1;
                 if(detect(i,graph,color)==false)
                     return false;
             }
