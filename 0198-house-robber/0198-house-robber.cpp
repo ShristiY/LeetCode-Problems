@@ -1,6 +1,6 @@
 class Solution {
 public:
-    //recursion
+    //memoization
     int func(int index,vector<int>&nums, vector<int>&dp)
     {
         if(index==0) return nums[index];
