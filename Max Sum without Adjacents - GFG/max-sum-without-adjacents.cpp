@@ -9,26 +9,20 @@ using namespace std;
 class Solution{
 public:	
 	// calculate the maximum sum with out adjacent
-	int func(int index,int *arr,vector<int>&dp)
-	{
-	    dp[0]=arr[0];
-	    if(dp[index]!=-1) return dp[index];
-	  
-	    int pick=INT_MIN;
-	       for(int i=1;i<=index;i++)
-	       {
-	        pick=arr[i];
-	        if(i>1)
-	        pick+=dp[i-2];
-	        int notPick=0+dp[i-1];
-	        dp[i]= max(pick,notPick);
-	       }
-	   
-	    return dp[index];
-	}
 	int findMaxSum(int *arr, int n) {
-	    vector<int>dp(n,-1);
-	   return func(n-1,arr,dp);
+	    int prev=arr[0];
+	    int prev2=0;
+	    for(int i=1;i<n;i++)
+	    {
+	        int pick=arr[i];
+	        if(i>1)
+	        pick+=prev2;
+	        int notPick=prev;
+	        int curr=max(pick,notPick);
+	        prev2=prev;
+	        prev=curr;
+	    }
+	    return prev;
 	}
 };
 
