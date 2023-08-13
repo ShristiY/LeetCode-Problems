@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //MEMIOZATION
     int func(int i, int j, vector<vector<int>>&mat, int n, vector<vector<int>>&dp)
     {
         if(i==n-1) return mat[i][j];
