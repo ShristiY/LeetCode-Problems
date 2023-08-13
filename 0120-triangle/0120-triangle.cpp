@@ -1,20 +1,25 @@
 class Solution {
 public:
-    //MEMIOZATION
-    int func(int i, int j, vector<vector<int>>&mat, int n, vector<vector<int>>&dp)
-    {
-        if(i==n-1) return mat[i][j];
-        if(dp[i][j]!=-1) return dp[i][j];
+    //tabulation
+   
+    int minimumTotal(vector<vector<int>>& mat) {
+        int n=mat.size();
         
-        int down=mat[i][j]+func(i+1,j,mat,n,dp);
-        int dia=mat[i][j]+func(i+1,j+1,mat,n,dp);
-        return dp[i][j]=min(down,dia);
-    }
-    int minimumTotal(vector<vector<int>>& triangle) {
-        int n=triangle.size();
+        vector<vector<int>>dp(n,vector<int>(n,0));
+        for(int j=0;j<n;j++)
+            dp[n-1][j]=mat[n-1][j];
         
-        vector<vector<int>>dp(n,vector<int>(n,-1));
-        return func(0,0,triangle,n,dp);
+        for(int i=n-2;i>=0;i--)
+        {
+            for(int j=i;j>=0;j--)
+            {
+                int down=mat[i][j]+dp[i+1][j];
+                int dia=mat[i][j]+dp[i+1][j+1];
+                
+                dp[i][j]=min(down,dia);
+            }
+        }
+        return dp[0][0];
         
     }
 };
