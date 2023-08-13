@@ -1,6 +1,6 @@
 class Solution {
 public:
-    //memoization
+    //tabulation
     int func(int n, int m, vector<vector<int>>&grid, vector<vector<int>>&dp)
     {
        for(int i=0;i<=n;i++)
