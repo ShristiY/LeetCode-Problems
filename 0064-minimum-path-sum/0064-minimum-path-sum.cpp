@@ -1,15 +1,31 @@
 class Solution {
 public:
     //memoization
-    int func(int i, int j, vector<vector<int>>&grid, vector<vector<int>>&dp)
+    int func(int n, int m, vector<vector<int>>&grid, vector<vector<int>>&dp)
     {
-        if(i==0 && j==0) return grid[i][j];
-        if(i<0 || j<0) return 1e9;
-        if(dp[i][j]!=-1) return dp[i][j];
-        int up=0,left=0;
-        up=grid[i][j]+func(i-1,j,grid,dp);
-        left=grid[i][j]+func(i,j-1,grid,dp);
-        return dp[i][j]=min(up,left);
+       for(int i=0;i<=n;i++)
+       {
+           for(int j=0;j<=m;j++)
+           {
+               if(i==0 && j==0)
+               {
+                   dp[i][j]=grid[i][j];
+               }
+               else{
+               int left=grid[i][j],up=grid[i][j];
+               
+               if(i>0) up+=dp[i-1][j];
+               else up+=1e9;
+               
+               if(j>0) left+=dp[i][j-1];
+               else
+                   left+=1e9;
+               
+               dp[i][j]=min(up,left);
+           }
+           }
+       }
+        return dp[n][m];
     }
     int minPathSum(vector<vector<int>>& grid) {
         int n=grid.size();
