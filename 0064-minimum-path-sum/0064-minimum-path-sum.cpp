@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //memoization
     int func(int i, int j, vector<vector<int>>&grid, vector<vector<int>>&dp)
     {
         if(i==0 && j==0) return grid[i][j];
