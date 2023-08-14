@@ -1,15 +1,17 @@
 class Solution {
 public:
-    int climbStairs(int n) {
-        //Most optimised
-        int prev=1;
-        int prev2=1;
+    int func(int n,vector<int>&dp)
+    {
+        dp[0]=1;
+        dp[1]=1;
         for(int i=2;i<=n;i++)
         {
-            int cur=prev+prev2;
-            prev2=prev;
-            prev=cur;
+            dp[i]=dp[i-1]+dp[i-2];
         }
-        return prev;
+        return dp[n];
+    }
+    int climbStairs(int n) {
+        vector<int>dp(n+1,-1);
+        return func(n,dp);
     }
 };
