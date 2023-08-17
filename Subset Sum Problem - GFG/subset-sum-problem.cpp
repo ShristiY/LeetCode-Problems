@@ -11,15 +11,12 @@ class Solution{
 public:
 
     bool isSubsetSum(vector<int>&arr, int k){
-        // code here 
+        //MOST OPTIMISED 
         int n=arr.size();
-        vector<vector<bool>>dp(n,vector<bool>(k+1,false));
-        for(int i=0;i<n;i++)
-        {
-            dp[i][0]=true;
-        }
+        vector<bool>prev(k+1,false),cur(k+1,false);
+        prev[0]=true;
         if(arr[0]<=k)
-        dp[0][arr[0]]=true;
+        prev[arr[0]]=true;
         
         for(int ind=1;ind<n;ind++)
         {
@@ -27,12 +24,13 @@ public:
             {
                 bool take=false;
                 if(target>=arr[ind])
-                take=dp[ind-1][target-arr[ind]];
-                bool notTake=dp[ind-1][target];
-                dp[ind][target]=take||notTake;
+                take=prev[target-arr[ind]];
+                bool notTake=prev[target];
+                cur[target]=take||notTake;
             }
+            prev=cur;
         }
-        return dp[n-1][k];
+        return prev[k];
         
     }
 };
