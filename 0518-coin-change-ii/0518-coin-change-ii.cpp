@@ -3,25 +3,26 @@ public:
 
     int change(int T, vector<int>& arr) {
         int n=arr.size();
-         vector<vector<long>> dp(n,vector<long>(T+1,0));
+         vector<long>prev(T+1,0),cur(T+1,0);
     for(int i=0;i<=T;i++)
     {
         if(i%arr[0]==0)
-            dp[0][i]=1;
+            prev[i]=1;
     }
         
         for(int ind=1;ind<n;ind++)
         {
             for(int target=0;target<=T;target++)
             {
-                long notTake=dp[ind-1][target];
+                long notTake=prev[target];
                 long take=0;
                 if(arr[ind]<=target)
-                    take=dp[ind][target-arr[ind]];
+                    take=cur[target-arr[ind]];
                 
-                dp[ind][target]=take+notTake;
+                cur[target]=take+notTake;
             }
+            prev=cur;
         }
-        return dp[n-1][T];
+        return prev[T];
     }
 };
