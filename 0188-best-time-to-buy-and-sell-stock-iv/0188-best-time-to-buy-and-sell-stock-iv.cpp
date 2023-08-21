@@ -1,22 +1,31 @@
 class Solution {
 public:
-    int func(int ind,int buy,int k,vector<int>&arr,vector<vector<vector<int>>>&dp,int n)
-    {
-        if(ind==n || k==0)
-            return 0;
-        if(dp[ind][buy][k]!=-1) return dp[ind][buy][k];
-        int profit;
-        
-        if(buy==0)
-            profit=max(-arr[ind]+func(ind+1,1,k,arr,dp,n),func(ind+1,0,k,arr,dp,n));
-        else
-            profit=max(arr[ind]+func(ind+1,0,k-1,arr,dp,n),func(ind+1,1,k,arr,dp,n));
-        
-        return dp[ind][buy][k]=profit;
+    int maxProfit(int k, vector<int>& Arr) {
+          int n=Arr.size();
+        vector<vector<vector<int>>> dp(n+1,
+                                    vector<vector<int>> 
+                                            (2,vector<int>(k+1,0)));
+                                            
+    // As dp array is intialized to 0, we have already covered the base case
+    
+    for(int ind = n-1; ind>=0; ind--){
+        for(int buy = 1; buy>=0; buy--){
+            for(int cap=1; cap<=k; cap++){
+                
+                if(buy==0){// We can buy the stock
+                    dp[ind][buy][cap] = max(0+dp[ind+1][0][cap], 
+                                -Arr[ind] + dp[ind+1][1][cap]);
+                 }
+    
+                if(buy==1){// We can sell the stock
+                    dp[ind][buy][cap] = max(0+dp[ind+1][1][cap],
+                                Arr[ind] + dp[ind+1][0][cap-1]);
+                }
+            }
+        }
     }
-    int maxProfit(int k, vector<int>& arr) {
-        int n=arr.size();
-        vector<vector<vector<int>>>dp(n,vector<vector<int>>(2,vector<int>(k+1,-1)));
-        return func(0,0,k,arr,dp,n);
+    
+    
+    return dp[0][0][k];
     }
 };
