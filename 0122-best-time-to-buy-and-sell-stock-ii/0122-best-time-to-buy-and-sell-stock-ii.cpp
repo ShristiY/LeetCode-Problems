@@ -19,7 +19,7 @@ public:
     }
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
-        if(n==0) return 0;
+        // if(n==0) return 0;
         vector<vector<int>>dp(n,vector<int>(2,-1));
         return func(0,0,prices,n,dp);
     }
