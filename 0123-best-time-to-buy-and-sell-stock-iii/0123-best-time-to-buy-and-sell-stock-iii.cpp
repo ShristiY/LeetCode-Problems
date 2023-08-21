@@ -9,7 +9,7 @@ public:
     // As dp array is intialized to 0, we have already covered the base case
     
     for(int ind = n-1; ind>=0; ind--){
-        for(int buy = 0; buy<=1; buy++){
+        for(int buy = 1; buy>=0; buy--){
             for(int cap=1; cap<=2; cap++){
                 
                 if(buy==0){// We can buy the stock
