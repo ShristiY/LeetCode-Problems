@@ -1,31 +1,19 @@
 class Solution {
 public:
-    int maxProfit(int k, vector<int>& Arr) {
-          int n=Arr.size();
-        vector<vector<vector<int>>> dp(n+1,
-                                    vector<vector<int>> 
-                                            (2,vector<int>(k+1,0)));
-                                            
-    // As dp array is intialized to 0, we have already covered the base case
-    
-    for(int ind = n-1; ind>=0; ind--){
-        for(int buy = 1; buy>=0; buy--){
-            for(int cap=1; cap<=k; cap++){
-                
-                if(buy==0){// We can buy the stock
-                    dp[ind][buy][cap] = max(0+dp[ind+1][0][cap], 
-                                -Arr[ind] + dp[ind+1][1][cap]);
-                 }
-    
-                if(buy==1){// We can sell the stock
-                    dp[ind][buy][cap] = max(0+dp[ind+1][1][cap],
-                                Arr[ind] + dp[ind+1][0][cap-1]);
-                }
+    int maxProfit(int k, vector<int>& arr) {
+         int n=arr.size();
+        vector<int>ahead(2*k+1,0),cur(2*k+1,0);
+        for(int ind=n-1;ind>=0;ind--)
+        {
+            for(int trans=2*k-1;trans>=0;trans--)
+            {
+                if(trans%2==0)
+                    cur[trans]=max(-arr[ind]+ahead[trans+1],ahead[trans]);
+                else
+                    cur[trans]=max(arr[ind]+ahead[trans+1],ahead[trans]);
             }
+            ahead=cur;
         }
-    }
-    
-    
-    return dp[0][0][k];
+        return ahead[0];
     }
 };
