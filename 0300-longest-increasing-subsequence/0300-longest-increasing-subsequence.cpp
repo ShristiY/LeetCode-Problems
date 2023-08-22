@@ -1,22 +1,21 @@
 class Solution {
 public:
-
-
+    //MOST OPTIMAL
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
-        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
-        for(int ind=n-1;ind>=0;ind--)
+        vector<int>dp(n,1);
+        for(int ind=0;ind<n;ind++)
         {
-            for(int prev=ind-1;prev>=-1;prev--)
+            for(int prev=0;prev<=ind-1;prev++)
             {
-                int notTake=dp[ind+1][prev+1];
-                int take=0;
-                if(prev==-1 || nums[prev]<nums[ind])
-                take=1+dp[ind+1][ind+1];
-                
-                dp[ind][prev+1]=max(take,notTake);
+                if(nums[prev]<nums[ind])
+                    dp[ind]=max(dp[ind],dp[prev]+1);
             }
         }
-        return dp[0][0];
+        int maxi=dp[0];
+        for(int i=1;i<n;i++)
+            maxi=max(maxi,dp[i]);
+        
+        return maxi;
     }
 };
