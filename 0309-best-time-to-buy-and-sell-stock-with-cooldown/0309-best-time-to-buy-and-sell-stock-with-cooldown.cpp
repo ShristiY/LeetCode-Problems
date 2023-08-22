@@ -1,19 +1,14 @@
 class Solution {
 public:
-    int func(int ind, int buy, int n, vector<vector<int>>&dp, vector<int>&arr)
-    {
-        if(ind>=n) return 0;
-        if(dp[ind][buy]!=-1) return dp[ind][buy];
-        int profit;
-        if(buy==0)
-            profit=max(-arr[ind]+func(ind+1,1,n,dp,arr),func(ind+1,0,n,dp,arr));
-        else
-            profit=max(arr[ind]+func(ind+2,0,n,dp,arr),func(ind+1,1,n,dp,arr));
-        return dp[ind][buy]=profit;
-    }
+
     int maxProfit(vector<int>& arr) {
         int n=arr.size();
-        vector<vector<int>>dp(n+1,vector<int>(2,-1));
-        return func(0,0,n,dp,arr);
+        vector<vector<int>>dp(n+2,vector<int>(2,0));
+        for(int ind=n-1;ind>=0;ind--)
+        {
+            dp[ind][0]=max(-arr[ind]+dp[ind+1][1],dp[ind+1][0]);
+            dp[ind][1]=max(arr[ind]+dp[ind+2][0],dp[ind+1][1]);
+        }
+        return dp[0][0];
     }
 };
