@@ -1,19 +1,18 @@
 class Solution {
 public:
     int maxProfit(int k, vector<int>& arr) {
-         int n=arr.size();
-        vector<int>ahead(2*k+1,0),cur(2*k+1,0);
+          int n=arr.size();
+        vector<vector<int>>dp(n+1,vector<int>(2*k+1,0));
         for(int ind=n-1;ind>=0;ind--)
         {
             for(int trans=2*k-1;trans>=0;trans--)
             {
                 if(trans%2==0)
-                    cur[trans]=max(-arr[ind]+ahead[trans+1],ahead[trans]);
+                    dp[ind][trans]=max(-arr[ind]+dp[ind+1][trans+1],dp[ind+1][trans]);
                 else
-                    cur[trans]=max(arr[ind]+ahead[trans+1],ahead[trans]);
+                    dp[ind][trans]=max(arr[ind]+dp[ind+1][trans+1],dp[ind+1][trans]);
             }
-            ahead=cur;
         }
-        return ahead[0];
+        return dp[0][0];
     }
 };
