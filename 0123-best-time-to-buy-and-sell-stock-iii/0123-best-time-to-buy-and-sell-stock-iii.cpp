@@ -1,21 +1,25 @@
 class Solution {
 public:
-  
-    int maxProfit(vector<int>&  arr) {
-        int n=arr.size();
-        vector<vector<int>>ahead(2,vector<int>(3,0)),cur(2,vector<int>(3,0));
+    int func(int ind, int trans, vector<vector<int>>&dp,vector<int>&arr,int n)
+    {
+        if(ind==n) return 0;
+        if(trans==4) return 0;
+        if(dp[ind][trans]!=-1) return dp[ind][trans];
+        int profit;
         
-        for(int ind=n-1;ind>=0;ind--)
+        if(trans%2==0)
         {
-            for(int cap=1;cap<=2;cap++)
-            {
-                cur[0][cap]=max(-arr[ind]+ahead[1][cap],0+ahead[0][cap]);
-                
-                cur[1][cap]=max(arr[ind]+ahead[0][cap-1],0+ahead[1][cap]);
-                
-            }
-            ahead=cur;
+            profit=max(-arr[ind]+func(ind+1,trans+1,dp,arr,n),func(ind+1,trans,dp,arr,n));
+            
         }
-        return ahead[0][2];
+        else
+            profit=max(arr[ind]+func(ind+1,trans+1,dp,arr,n),func(ind+1,trans,dp,arr,n));
+        
+        return dp[ind][trans]=profit;
+    }
+    int maxProfit(vector<int>& arr) {
+        int n=arr.size();
+        vector<vector<int>>dp(n+1,vector<int>(5,-1));
+        return func(0,0,dp,arr,n);
     }
 };
