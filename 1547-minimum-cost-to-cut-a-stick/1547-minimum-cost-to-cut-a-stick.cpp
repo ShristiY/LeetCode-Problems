@@ -11,9 +11,9 @@ public:
         
         for(int i=m;i>=1;i--)
         {
-            for(int j=1;j<=m;j++)
+            for(int j=i;j<=m;j++)
             {
-                if(i>j) continue;
+                // if(i>j) continue;
                 int mini=INT_MAX;
                 for(int k=i;k<=j;k++)
                 {
