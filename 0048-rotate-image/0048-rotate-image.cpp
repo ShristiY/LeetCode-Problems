@@ -1,6 +1,5 @@
 class Solution {
 public:
-    //IInd approach
     void rotate(vector<vector<int>>& mat) {
         int n=mat.size();
         int m=mat[0].size();
