@@ -25,9 +25,9 @@ public:
             return head->next;
         else{
             int t=0;
-        while(t!=req-1)
+        while(req!=1)
         {
-            t++;
+            req--;
             node=node->next;
         }
         node->next=node->next->next;
