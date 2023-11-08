@@ -12,7 +12,7 @@ public:
         for(auto it:mp)
         {
             int num=it.first;
-            int freq=-(it.second); //see this
+            int freq=-(it.second); //see this Note: The negative frequency is used because priority queue  implemented is max-heap, and we want to sort elements in descending order by frequency.
             pq.push({freq,num});
         }
         while(!pq.empty())
