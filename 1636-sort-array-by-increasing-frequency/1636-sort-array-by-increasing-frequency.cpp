@@ -12,13 +12,13 @@ public:
         for(auto it:mp)
         {
             int num=it.first;
-            int freq=-(it.second);
+            int freq=-(it.second); //see this
             pq.push({freq,num});
         }
         while(!pq.empty())
         {
             int num=pq.top().second;
-            count=-(pq.top().first);
+            count=-(pq.top().first);//see this
             while(count!=0)
             {
                 count--;
