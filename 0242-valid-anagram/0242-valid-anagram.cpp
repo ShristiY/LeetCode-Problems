@@ -4,7 +4,7 @@ public:
     if (s.size() != t.size())
         return false;
     
-    vector<int> arr(26); // like a hashmap
+    vector<int> arr(26,0); // like a hashmap
 
     for (int i = 0; i < s.size(); i++)
         arr[s[i] - 'a']++;
