@@ -10,13 +10,13 @@ public:
         arr[s[i] - 'a']++;
 
     for (int i = 0; i < t.size(); i++) {
-        int freq = arr[t[i] - 'a'] - 1;
+        int freq = --arr[t[i] - 'a'];
 
         if (freq < 0)
             return false;
         
         // Update the frequency in the array
-        arr[t[i] - 'a']--;
+        // arr[t[i] - 'a']--;
     }
 
     return true;
