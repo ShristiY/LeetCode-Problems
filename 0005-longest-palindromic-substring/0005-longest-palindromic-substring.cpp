@@ -9,7 +9,10 @@ bool solve(string &s, int l, int r, vector<vector<int>> &dp) {
     if (dp[l][r] != -1)
         return dp[l][r];
 
-    return dp[l][r] = solve(s, l + 1, r - 1, dp) && (s[l] == s[r]);
+    if(s[l]==s[r])
+        return dp[l][r]=solve(s,l+1,r-1,dp);
+    
+    return dp[l][r]=false;
 }
 
 string func(string s, vector<vector<int>> &dp) {
