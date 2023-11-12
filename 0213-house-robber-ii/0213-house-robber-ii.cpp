@@ -2,18 +2,19 @@ class Solution {
 public:
     int f(int i,vector<int>&nums,vector<int>&dp)//same as the one used in house robber1
 	{
-		if(i==0)
-			return nums[i];
-		if(i<0)
-			return 0;
-     
-     if(dp[i]!=-1)
-     return dp[i];
-     
-    int p=nums[i]+f(i-2,nums,dp);
-    int np=0+f(i-1,nums,dp);
-     
-    return dp[i]=max(p,np);
+        int n=nums.size();
+		
+        dp[0]=nums[0];
+
+        for(int i=1;i<nums.size();i++)
+        {
+            int p=nums[i];
+            if(i>1)
+                p+=dp[i-2];
+            int np=dp[i-1];
+            dp[i]=max(p,np);
+        }
+        return dp[n-1];
 }
     int rob(vector<int>& nums) {
          int n=nums.size();
